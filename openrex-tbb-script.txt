@@ -1,0 +1,59 @@
+///---------------------------------------------------------------------------
+// OpenRex - Sample Try-Before-Buy Configuration
+// Set VDDOTP = 0 V, PWRON = HIGH, LICELL not used, VIN = 4.2 V,  VDDIO = 3.3 V
+//---------------------------------------------------------------------------
+WRITE_I2C:7F:01 // Access PF0100 EXT Page1
+//[Extended Page 1 Registers: 0xA0 - 0xAF] ----------------------------------
+WRITE_I2C:A0:2B // Sw1AB Voltage = 1.375 V
+WRITE_I2C:A1:02 // Sw1AB Sequence = 2
+WRITE_I2C:A2:05 // Sw1AB Freq = 2 MHZ, Mode = Single phase
+WRITE_I2C:A8:2B // Sw1c Voltage = 1.375 V
+WRITE_I2C:A9:03 // Sw1c Sequence = 3
+WRITE_I2C:AA:01 // Sw1c Freq = 2.0 MHZ
+WRITE_I2C:AC:72 // Sw2 Voltage = 3.30 V
+WRITE_I2C:AD:06 // Sw2 Sequence = 6
+WRITE_I2C:AE:01 // Sw2 Freq = 2 MHZ
+//[Extended Page 1 Registers: 0xB0 - 0xBF] ----------------------------------
+WRITE_I2C:B0:2C // Sw3A Voltage = 1.500 V
+WRITE_I2C:B1:04 // Sw3A Sequence = 4
+WRITE_I2C:B2:05 // Sw3A Freq = 2 MHZ, Mode = Single phase
+WRITE_I2C:B4:2C // Sw3B Voltage = 1.500 V
+WRITE_I2C:B5:04 // Sw3B Sequence = 4
+WRITE_I2C:B6:01 // Sw3B Freq = 2 MHZ
+WRITE_I2C:B8:38 // Sw4 Voltage = 1.350 V
+WRITE_I2C:B9:05 // Sw4 Sequence = 5
+WRITE_I2C:BA:11 // Sw4 VTT Mode enable, Freq = 2 MHZ
+WRITE_I2C:BC:00 // Swbst Voltage = 5.0 V
+WRITE_I2C:BD:08 // Swbst Sequence = 8
+//[Extended Page 1 Registers: 0xC0 - 0xCF] ----------------------------------
+WRITE_I2C:C0:06 // Vsnvs Voltage = 3.0 V
+WRITE_I2C:C4:03 // VREF DDR Sequence = 3
+WRITE_I2C:C8:0E // Vgen1 Voltage = 1.5 V
+WRITE_I2C:C9:0B // Vgen1 Sequence = 11
+WRITE_I2C:CC:08 // Vgen2 Voltage = 1.2 V
+WRITE_I2C:CD:09 // Vgen2 Sequence = 9
+//[Extended Page 1 Registers: 0xD0 - 0xDF] ----------------------------------
+WRITE_I2C:D0:00 // Vgen3 Voltage = 1.8 V
+WRITE_I2C:D1:0A // Vgen3 Sequence = 10
+WRITE_I2C:D4:07 // Vgen4 Voltage = 2.5 V
+WRITE_I2C:D5:07 // Vgen4 Sequence = 7
+WRITE_I2C:D8:0F // Vgen5 Voltage = 3.3 V
+WRITE_I2C:D9:00 // Vgen5 OFF
+WRITE_I2C:DC:0C // Vgen6 Voltage = 3.0 V
+WRITE_I2C:DD:01 // Vgen6 Sequence = 1
+//[Extended Page 1 Registers: 0xE0 - 0xEF] ----------------------------------
+WRITE_I2C:E0:0F // Power-up DVS = 1.5625 mV/us, SeqCLK = 4 ms, PWRON config = 0
+WRITE_I2C:E1:0F // Power-up DVS = 1.5625 mV/us, SeqCLK = 4 ms, PWRON config = 0
+WRITE_I2C:E2:0F // Power-up DVS = 1.5625 mV/us, SeqCLK = 4 ms, PWRON config = 0
+WRITE_I2C:E8:01 // Fault Mode = Enabled
+//[Extended Page 1 Registers: 0xF0 - 0xFF] ----------------------------------
+WRITE_I2C:FF:08 // I2C Device Address = 0x08
+//===========================================================================
+// TRY-BEFORE-BUY COMMANDS FOLLOW
+//===========================================================================
+WRITE_I2C:E4:80 // TBB POR=1 (This Enables TBB Mode)
+//---------------------------------------------------------------------------
+PWRON:LOW // PWRON LOW
+DELAY:500
+// !!!IMPORTANT!!!
+// Unplug programming header and AFTER that send PWRON HIGH
